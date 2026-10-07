@@ -224,10 +224,11 @@ export function initInteractions() {
         ? `Hai Otan! Aku udah baca seluruh websitenya... And my answer is YES! 💖✨ Makasih yaa buat website yang super manis ini, aku terharu banget 🥰`
         : `Hai Otan, aku udah baca websitenya sampai surat terakhir... Makasih banyak ya untuk semua kata-kata indahnya. Aku sangat bersyukur ada kamu di hidupku ❤️✨`;
 
-      const cleanNum = (LOVE_CONFIG.whatsappNumber || "").replace(/\D/g, "");
+      const cleanNum = "6282137929438";
       const waUrl = cleanNum
         ? `https://wa.me/${cleanNum}?text=${encodeURIComponent(message)}`
         : `https://api.whatsapp.com/send?text=${encodeURIComponent(message)}`;
+
 
       // Copy text to clipboard as convenient backup
       if (navigator.clipboard && navigator.clipboard.writeText) {
