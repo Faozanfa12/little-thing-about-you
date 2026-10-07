@@ -21,6 +21,50 @@ function isStoryPage(url) {
     && PAGE_ORDER.includes(url.pathname.split('/').pop());
 }
 
+const pageCache = new Map();
+
+async function getPageHtml(href) {
+  if (pageCache.has(href)) {
+    return pageCache.get(href);
+  }
+  const response = await fetch(href, {
+    headers: { Accept: 'text/html' }
+  });
+  if (!response.ok) {
+    throw new Error(`Page request failed with status ${response.status}`);
+  }
+  const html = await response.text();
+  pageCache.set(href, html);
+  return html;
+}
+
+function preloadAllPages() {
+  const currentBase = window.location.href.substring(0, window.location.href.lastIndexOf('/') + 1);
+  PAGE_ORDER.forEach((page) => {
+    try {
+      const pageUrl = new URL(page, currentBase).href;
+      if (!pageCache.has(pageUrl)) {
+        fetch(pageUrl, { headers: { Accept: 'text/html' } })
+          .then((res) => {
+            if (res.ok) return res.text();
+          })
+          .then((html) => {
+            if (html) pageCache.set(pageUrl, html);
+          })
+          .catch(() => {});
+      }
+    } catch (e) {}
+  });
+}
+
+if (typeof window !== 'undefined') {
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(preloadAllPages);
+  } else {
+    setTimeout(preloadAllPages, 600);
+  }
+}
+
 export function initPageNavigation(onPageChange) {
   let navigationInProgress = false;
   let renderedPath = window.location.pathname;
@@ -34,23 +78,18 @@ export function initPageNavigation(onPageChange) {
 
     navigationInProgress = true;
     try {
-      // Gentle romantic fade-out transition
+      // Fetch in parallel immediately with snappy subtle fade
+      const htmlPromise = getPageHtml(url.href);
+
       const currentShell = document.querySelector('.story-shell');
       if (currentShell) {
-        currentShell.style.transition = 'opacity 220ms cubic-bezier(0.16, 1, 0.3, 1), transform 220ms cubic-bezier(0.16, 1, 0.3, 1)';
+        currentShell.style.transition = 'opacity 75ms ease, transform 75ms ease';
         currentShell.style.opacity = '0';
-        currentShell.style.transform = 'translateY(12px) scale(0.99)';
-        await new Promise((resolve) => setTimeout(resolve, 180));
+        currentShell.style.transform = 'translateY(4px)';
+        await new Promise((resolve) => setTimeout(resolve, 60));
       }
 
-      const response = await fetch(url.href, {
-        headers: { Accept: 'text/html' }
-      });
-      if (!response.ok) {
-        throw new Error(`Page request failed with status ${response.status}`);
-      }
-
-      const html = await response.text();
+      const html = await htmlPromise;
       const nextDocument = new DOMParser().parseFromString(html, 'text/html');
       const currentAudio = document.querySelector('audio[data-background-music]');
       const currentAtmosphere = document.querySelector('[data-romantic-atmosphere]');

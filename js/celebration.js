@@ -109,6 +109,8 @@ export function initCelebration() {
   ];
 
   thinkButtons.forEach((button) => {
+    if (button.dataset.bound) return;
+    button.dataset.bound = 'true';
     let clickCount = 0;
 
     button.addEventListener('click', (e) => {
@@ -145,7 +147,8 @@ export function initCelebration() {
   });
 
   // Radiant YES button
-  if (yesButton) {
+  if (yesButton && !yesButton.dataset.bound) {
+    yesButton.dataset.bound = 'true';
     yesButton.addEventListener('click', () => {
       playCelebrationChime();
       startCelebration();

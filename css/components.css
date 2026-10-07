@@ -118,13 +118,11 @@
   position: relative;
   padding: 1.45rem 1.45rem;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.62);
-  border: 1px solid rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(255, 255, 255, 0.9);
   box-shadow:
-    0 12px 30px rgba(85, 30, 48, 0.06),
+    0 8px 24px rgba(85, 30, 48, 0.05),
     inset 0 1px 1px rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(14px);
-  -webkit-backdrop-filter: blur(14px);
   transition:
     transform var(--transition-spring),
     box-shadow var(--transition),
@@ -630,12 +628,11 @@
   padding: 0.95rem 1.85rem;
   font-size: 1rem;
   color: var(--wine);
-  background: rgba(255, 255, 255, 0.85);
+  background: rgba(255, 255, 255, 0.92);
   border: 1.5px solid rgba(184, 77, 107, 0.3);
   box-shadow:
-    0 10px 24px rgba(85, 30, 48, 0.08),
+    0 8px 20px rgba(85, 30, 48, 0.08),
     inset 0 1px 1px rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
 }
 
 .think-button:hover,
@@ -792,22 +789,20 @@
   gap: 0.65rem;
   padding: 0.85rem 1.85rem;
   border-radius: var(--radius-full);
-  background: linear-gradient(135deg, rgba(255, 230, 240, 0.2), rgba(255, 255, 255, 0.12));
-  border: 1.5px solid rgba(255, 220, 235, 0.45);
+  background: linear-gradient(135deg, rgba(255, 230, 240, 0.25), rgba(255, 255, 255, 0.18));
+  border: 1.5px solid rgba(255, 220, 235, 0.5);
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 0 20px rgba(255, 215, 230, 0.2);
   color: #ffffff;
   font-family: var(--font-body);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
   transition: transform var(--transition-spring), box-shadow var(--transition), background var(--transition), border-color var(--transition);
 }
 
 .wish-star-btn:hover:not(:disabled) {
   transform: translateY(-2px) scale(1.05);
-  background: linear-gradient(135deg, rgba(255, 230, 240, 0.35), rgba(255, 255, 255, 0.22));
+  background: linear-gradient(135deg, rgba(255, 230, 240, 0.38), rgba(255, 255, 255, 0.28));
   border-color: rgba(255, 235, 245, 0.8);
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35), 0 0 35px rgba(255, 215, 230, 0.45);
 }
@@ -816,7 +811,7 @@
   opacity: 0.9;
   cursor: default;
   border-color: rgba(212, 154, 74, 0.6);
-  background: rgba(212, 154, 74, 0.2);
+  background: rgba(212, 154, 74, 0.25);
   color: #fff2d6;
   box-shadow: 0 0 20px rgba(212, 154, 74, 0.3);
 }
@@ -825,9 +820,8 @@
   margin-top: 1.25rem;
   padding: 1.15rem 1.4rem;
   border-radius: var(--radius-lg);
-  background: rgba(255, 255, 255, 0.14);
-  border: 1px solid rgba(255, 255, 255, 0.28);
-  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.32);
   animation: wishFadeIn 600ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 

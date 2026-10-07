@@ -24,6 +24,7 @@ function hydrateConfigText() {
 }
 
 let noteInterval = null;
+let firstInteractionBound = false;
 
 function initMusic() {
   const audio = document.querySelector('audio[data-background-music]');
@@ -132,32 +133,37 @@ function initMusic() {
     }
   }
 
-  // Also auto-start music on first user click anywhere if user previously listened
-  const handleFirstInteraction = () => {
-    if (sessionStorage.getItem(playingKey) === 'true' && audio.paused) {
-      startPlayback();
-    }
-    window.removeEventListener('pointerdown', handleFirstInteraction);
-  };
-  window.addEventListener('pointerdown', handleFirstInteraction);
-
-  toggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    if (audio.paused) {
-      if (audio.readyState < HTMLMediaElement.HAVE_METADATA) {
-        audio.addEventListener('loadedmetadata', startPlayback, { once: true });
-        audio.load();
-      } else {
+  if (!firstInteractionBound) {
+    firstInteractionBound = true;
+    const handleFirstInteraction = () => {
+      if (sessionStorage.getItem(playingKey) === 'true' && audio.paused) {
         startPlayback();
       }
-      return;
-    }
+      window.removeEventListener('pointerdown', handleFirstInteraction);
+    };
+    window.addEventListener('pointerdown', handleFirstInteraction, { passive: true });
+  }
 
-    savePlaybackTime();
-    audio.pause();
-    sessionStorage.setItem(playingKey, 'false');
-    updateToggle(false);
-  });
+  if (!toggle.dataset.bound) {
+    toggle.dataset.bound = 'true';
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (audio.paused) {
+        if (audio.readyState < HTMLMediaElement.HAVE_METADATA) {
+          audio.addEventListener('loadedmetadata', startPlayback, { once: true });
+          audio.load();
+        } else {
+          startPlayback();
+        }
+        return;
+      }
+
+      savePlaybackTime();
+      audio.pause();
+      sessionStorage.setItem(playingKey, 'false');
+      updateToggle(false);
+    });
+  }
 }
 
 function initPage() {

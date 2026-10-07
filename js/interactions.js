@@ -6,6 +6,8 @@
 import { playWaxSealStamp, playShootingStarChime } from "./audio-fx.js";
 import { LOVE_CONFIG } from "./config.js";
 
+let parallaxBound = false;
+
 export function initInteractions() {
   // Intersection Observer for scroll / load reveals
   const revealTargets = document.querySelectorAll(".reveal");
@@ -28,26 +30,16 @@ export function initInteractions() {
 
   // Accordion Interactive Cards
   document.querySelectorAll(".interactive-card").forEach((card) => {
+    if (card.dataset.bound) return;
+    card.dataset.bound = "true";
+
     const trigger = card.querySelector(".card-trigger");
-    const description = card.querySelector(".card-description");
-    if (!trigger || !description) return;
-
-    const syncDescriptionState = (isOpen) => {
-      description.style.maxHeight = isOpen
-        ? `${description.scrollHeight + 16}px`
-        : "0px";
-      description.style.opacity = isOpen ? "1" : "0";
-      description.style.marginTop = isOpen ? "1rem" : "0";
-      description.style.overflow = "hidden";
-    };
-
-    syncDescriptionState(card.classList.contains("is-open"));
+    if (!trigger) return;
 
     const toggleCard = (event) => {
       event?.stopPropagation();
       const isOpen = card.classList.toggle("is-open");
       trigger.setAttribute("aria-expanded", String(isOpen));
-      syncDescriptionState(isOpen);
     };
 
     trigger.addEventListener("click", toggleCard);
@@ -65,39 +57,38 @@ export function initInteractions() {
     });
   });
 
-  // 3D Parallax Tilt Effect for Desktop
+  // 3D Parallax Tilt Effect for Desktop (Optimized zero-reflow, single listener)
   const prefersReducedMotion = window.matchMedia(
     "(prefers-reduced-motion: reduce)",
   ).matches;
-  if (!prefersReducedMotion && window.innerWidth > 900) {
-    const storyCard = document.querySelector(".story-card");
-    if (storyCard) {
-      let ticking = false;
+  if (!prefersReducedMotion && window.innerWidth > 900 && !parallaxBound) {
+    parallaxBound = true;
+    let ticking = false;
 
-      const handleMove = (e) => {
-        if (ticking) return;
-        ticking = true;
+    const handleMove = (e) => {
+      if (ticking) return;
+      ticking = true;
 
-        requestAnimationFrame(() => {
-          const rect = storyCard.getBoundingClientRect();
-          const centerX = rect.left + rect.width / 2;
-          const centerY = rect.top + rect.height / 2;
-          const rotateX = ((e.clientY - centerY) / (rect.height / 2)) * -2.5;
-          const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * 2.5;
+      requestAnimationFrame(() => {
+        const storyCard = document.querySelector(".story-card");
+        if (storyCard) {
+          const normX = (e.clientX / window.innerWidth) - 0.5;
+          const normY = (e.clientY / window.innerHeight) - 0.5;
+          storyCard.style.transform = `perspective(1200px) rotateX(${(normY * -3.2).toFixed(2)}deg) rotateY(${(normX * 3.2).toFixed(2)}deg)`;
+        }
+        ticking = false;
+      });
+    };
 
-          storyCard.style.transform = `perspective(1200px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg)`;
-          ticking = false;
-        });
-      };
+    const handleLeave = () => {
+      const storyCard = document.querySelector(".story-card");
+      if (storyCard) {
+        storyCard.style.transform = "perspective(1200px) rotateX(0deg) rotateY(0deg)";
+      }
+    };
 
-      const handleLeave = () => {
-        storyCard.style.transform =
-          "perspective(1200px) rotateX(0deg) rotateY(0deg)";
-      };
-
-      window.addEventListener("pointermove", handleMove, { passive: true });
-      window.addEventListener("mouseleave", handleLeave);
-    }
+    window.addEventListener("pointermove", handleMove, { passive: true });
+    window.addEventListener("mouseleave", handleLeave);
   }
 
   // Interactive Wax Seal Love Stamp (Page 12)

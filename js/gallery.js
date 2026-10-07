@@ -63,27 +63,11 @@ export function initGallery() {
     closeButton?.focus();
   };
 
-  // Attach click & hover effects to all gallery buttons
+  // Attach click effects to all gallery buttons
   gallery.querySelectorAll("[data-photo-index]").forEach((button) => {
+    if (button.dataset.bound) return;
+    button.dataset.bound = "true";
     const photoIndex = Number(button.getAttribute("data-photo-index"));
-
-    button.addEventListener("pointermove", (event) => {
-      const rect = button.getBoundingClientRect();
-      const x = (event.clientX - rect.left) / rect.width - 0.5;
-      const y = (event.clientY - rect.top) / rect.height - 0.5;
-      const image = button.querySelector("img");
-      if (image) {
-        image.style.transform = `scale(1.14) translate(${x * 14}px, ${y * 14}px)`;
-      }
-    });
-
-    button.addEventListener("pointerleave", () => {
-      const image = button.querySelector("img");
-      if (image) {
-        image.style.transform = "";
-      }
-    });
-
     button.addEventListener("click", () => {
       openLightbox(photoIndex);
     });
