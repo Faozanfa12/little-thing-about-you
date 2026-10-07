@@ -1,0 +1,457 @@
+/* ==========================================================================
+   Base Styles & Romantic Atmosphere
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-body);
+  background:
+    radial-gradient(ellipse 80% 60% at 12% 16%, rgba(248, 192, 214, 0.65) 0%, transparent 60%),
+    radial-gradient(ellipse 70% 60% at 88% 82%, rgba(246, 219, 178, 0.58) 0%, transparent 60%),
+    radial-gradient(ellipse 90% 70% at 50% 120%, rgba(238, 178, 202, 0.42) 0%, transparent 70%),
+    radial-gradient(ellipse 65% 45% at 50% -8%, rgba(254, 230, 204, 0.65) 0%, transparent 60%),
+    var(--background);
+  background-attachment: fixed;
+  color: var(--ink);
+  overflow-x: hidden;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+/* Custom romantic scrollbar */
+::-webkit-scrollbar {
+  width: 9px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 245, 240, 0.6);
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, #e5a4b7, #c96782);
+  border-radius: 999px;
+  border: 2px solid rgba(255, 248, 245, 0.8);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(180deg, #c96782, #9f3652);
+}
+
+.story-app {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+}
+
+/* ==========================================================================
+   Atmosphere & Ambient Lighting
+   ========================================================================== */
+
+.romantic-atmosphere {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-atmosphere);
+  overflow: hidden;
+  pointer-events: none;
+  contain: paint;
+}
+
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(65px);
+  opacity: 0.38;
+  mix-blend-mode: multiply;
+  pointer-events: none;
+  animation: glow-breathe 14s ease-in-out infinite alternate;
+}
+
+.ambient-glow--rose {
+  width: min(58vw, 720px);
+  aspect-ratio: 1;
+  top: -24%;
+  left: -16%;
+  background: radial-gradient(circle, rgba(244, 145, 185, 0.85) 0%, rgba(244, 145, 185, 0) 70%);
+}
+
+.ambient-glow--gold {
+  width: min(54vw, 680px);
+  aspect-ratio: 1;
+  right: -20%;
+  bottom: -32%;
+  background: radial-gradient(circle, rgba(248, 196, 118, 0.8) 0%, rgba(248, 196, 118, 0) 70%);
+  animation-delay: -6s;
+}
+
+.ambient-glow--lavender {
+  width: min(44vw, 560px);
+  aspect-ratio: 1;
+  left: 20%;
+  top: 45%;
+  background: radial-gradient(circle, rgba(226, 180, 240, 0.55) 0%, rgba(226, 180, 240, 0) 70%);
+  animation-delay: -10s;
+  animation-duration: 18s;
+}
+
+.ambient-glow--peach {
+  width: min(42vw, 520px);
+  aspect-ratio: 1;
+  right: 15%;
+  top: 10%;
+  background: radial-gradient(circle, rgba(255, 190, 165, 0.6) 0%, rgba(255, 190, 165, 0) 70%);
+  animation-delay: -4s;
+  animation-duration: 16s;
+}
+
+/* Light beams */
+.light-ray {
+  position: absolute;
+  top: -40%;
+  width: 26vw;
+  min-width: 190px;
+  max-width: 420px;
+  height: 165vh;
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255, 248, 230, 0.22) 30%, rgba(252, 222, 235, 0.12) 65%, rgba(255,255,255,0) 100%);
+  filter: blur(28px);
+  transform-origin: top center;
+  opacity: 0.65;
+  animation: ray-sway 18s ease-in-out infinite alternate;
+}
+
+.light-ray--one {
+  left: 8%;
+  transform: rotate(20deg);
+}
+
+.light-ray--two {
+  right: 10%;
+  transform: rotate(-22deg);
+  opacity: 0.48;
+  animation-delay: -8s;
+}
+
+/* ==========================================================================
+   Sparkles, Starlight & Bokeh Orbs
+   ========================================================================== */
+
+.atmosphere-sparkles {
+  position: absolute;
+  inset: 0;
+}
+
+.atmosphere-sparkles i {
+  position: absolute;
+  left: var(--sparkle-x);
+  top: var(--sparkle-y);
+  width: var(--sparkle-size, 3px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow:
+    0 0 8px 2px rgba(255, 240, 195, 0.9),
+    0 0 20px 4px rgba(235, 140, 175, 0.55);
+  opacity: 0;
+  animation: sparkle-twinkle var(--sparkle-duration, 4s) ease-in-out var(--sparkle-delay, 0s) infinite;
+}
+
+/* Starlight diamonds (✦ / ✧) */
+.atmosphere-sparkles .star-cross {
+  width: auto;
+  height: auto;
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+  color: #fff9e6;
+  font-size: var(--star-size, 14px);
+  line-height: 1;
+  animation: starGlint var(--sparkle-duration, 5s) ease-in-out var(--sparkle-delay, 0s) infinite;
+  text-shadow:
+    0 0 10px rgba(255, 225, 140, 0.95),
+    0 0 22px rgba(225, 105, 150, 0.6);
+}
+
+/* Bokeh floating bubbles */
+.bokeh-field {
+  position: absolute;
+  inset: 0;
+}
+
+.bokeh-orb {
+  position: absolute;
+  left: var(--bokeh-x, 50%);
+  bottom: -40px;
+  width: var(--bokeh-size, 24px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.7), rgba(250, 205, 220, 0.25) 60%, rgba(250, 205, 220, 0) 100%);
+  box-shadow: 0 0 16px rgba(255, 220, 235, 0.4);
+  animation: bokehDrift var(--bokeh-duration, 14s) ease-in-out var(--bokeh-delay, 0s) infinite;
+}
+
+/* Falling flower petals */
+.petal-field {
+  position: absolute;
+  inset: 0;
+  perspective: 600px;
+}
+
+.falling-petal {
+  position: absolute;
+  left: var(--petal-x, 50%);
+  top: -40px;
+  width: var(--petal-w, 14px);
+  height: var(--petal-h, 18px);
+  background: linear-gradient(135deg, rgba(255, 205, 222, 0.85) 0%, rgba(235, 140, 172, 0.75) 100%);
+  border-radius: 80% 15% 75% 20%;
+  box-shadow: 0 4px 10px rgba(180, 75, 110, 0.15);
+  animation: petalFall var(--petal-duration, 12s) ease-in-out var(--petal-delay, 0s) infinite;
+}
+
+/* ==========================================================================
+   Butterflies
+   ========================================================================== */
+
+.butterfly-field {
+  position: absolute;
+  inset: 0;
+  perspective: 900px;
+}
+
+.butterfly {
+  position: absolute;
+  display: block;
+  width: clamp(54px, 5.8vw, 76px);
+  filter: drop-shadow(0 8px 16px rgba(140, 55, 90, 0.28)) drop-shadow(0 0 10px rgba(245, 175, 195, 0.4));
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.butterfly svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+}
+
+.butterfly--one {
+  animation: butterfly-flight-one 24s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.butterfly--two {
+  width: clamp(42px, 4.4vw, 58px);
+  animation: butterfly-flight-two 28s cubic-bezier(0.4, 0, 0.2, 1) 7s infinite;
+}
+
+.butterfly--three {
+  width: clamp(34px, 3.8vw, 48px);
+  animation: butterfly-flight-three 25s cubic-bezier(0.4, 0, 0.2, 1) 13s infinite;
+}
+
+.butterfly .wing {
+  fill: url(#butterflyGradPrimary, #db8fa9);
+  stroke: rgba(142, 60, 92, 0.6);
+  stroke-width: 1.2;
+  transform-box: fill-box;
+  transform-origin: 50% 86%;
+  animation: butterfly-flap 460ms ease-in-out infinite alternate;
+}
+
+.butterfly .wing--upper {
+  animation-delay: -110ms;
+}
+
+.butterfly .wing--lower {
+  fill: #f5bed2;
+}
+
+.butterfly .butterfly-body {
+  fill: #6e2e45;
+  stroke: rgba(255, 240, 225, 0.85);
+  stroke-width: 0.8;
+}
+
+.butterfly .butterfly-antenna {
+  fill: none;
+  stroke: #6e2e45;
+  stroke-width: 1.2;
+  stroke-linecap: round;
+}
+
+/* ==========================================================================
+   Texture & Noise
+   ========================================================================== */
+
+.grain {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.045;
+  z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+
+.display {
+  font-family: var(--font-display);
+  color: var(--ink);
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  font-weight: 600;
+  text-shadow: 0 2px 24px rgba(184, 77, 107, 0.12);
+}
+
+.script {
+  font-family: var(--font-script);
+  color: var(--rose);
+  line-height: 1.15;
+  font-weight: 500;
+  position: relative;
+  display: inline-block;
+  background: linear-gradient(135deg, #b84d6b 0%, #e09848 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  filter: drop-shadow(0 2px 10px rgba(184, 77, 107, 0.25));
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.85rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--rose);
+  font-weight: 700;
+  padding: 0.35rem 0.85rem;
+  background: rgba(220, 95, 130, 0.08);
+  border: 1px solid rgba(220, 95, 130, 0.18);
+  border-radius: var(--radius-full);
+  box-shadow: 0 2px 8px rgba(184, 77, 107, 0.06);
+}
+
+.eyebrow::before,
+.eyebrow::after {
+  content: "✦";
+  font-size: 0.65rem;
+  color: var(--gold);
+}
+
+.body-copy {
+  font-size: 1.05rem;
+  color: var(--muted);
+  line-height: 1.82;
+  font-weight: 400;
+}
+
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+.primary, .secondary {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  min-height: 54px;
+  border-radius: var(--radius-full);
+  padding: 0.95rem 1.85rem;
+  font-weight: 700;
+  font-size: 0.98rem;
+  letter-spacing: 0.015em;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  overflow: hidden;
+  transition:
+    transform var(--transition-spring),
+    box-shadow var(--transition),
+    background var(--transition),
+    border-color var(--transition);
+}
+
+.primary {
+  color: #ffffff;
+  background: linear-gradient(135deg, #ce5577 0%, #902f48 100%);
+  box-shadow:
+    0 14px 32px rgba(144, 47, 72, 0.25),
+    0 0 24px rgba(206, 85, 119, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 0.45);
+}
+
+/* Light sweep shine on primary button */
+.primary::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 20%, rgba(255, 255, 255, 0.4) 45%, transparent 60%);
+  transform: translateX(-150%) skewX(-20deg);
+  transition: transform 650ms ease;
+  pointer-events: none;
+}
+
+.primary:hover::before,
+.primary:focus-visible::before {
+  transform: translateX(160%) skewX(-20deg);
+}
+
+.primary:hover,
+.primary:focus-visible {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow:
+    0 20px 42px rgba(144, 47, 72, 0.35),
+    0 0 35px rgba(206, 85, 119, 0.55),
+    inset 0 1px 1px rgba(255, 255, 255, 0.6);
+}
+
+.primary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.secondary {
+  color: #5d2b38;
+  background: rgba(255, 255, 255, 0.68);
+  border: 1px solid rgba(184, 77, 107, 0.22);
+  box-shadow:
+    0 10px 24px rgba(90, 45, 60, 0.07),
+    inset 0 1px 1px rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(12px);
+}
+
+.secondary:hover,
+.secondary:focus-visible {
+  transform: translateY(-3px) scale(1.02);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: rgba(184, 77, 107, 0.4);
+  box-shadow:
+    0 16px 32px rgba(90, 45, 60, 0.12),
+    0 0 20px rgba(247, 162, 186, 0.35),
+    inset 0 1px 1px rgba(255, 255, 255, 1);
+  color: var(--wine);
+}
+
+.secondary:active {
+  transform: translateY(0) scale(0.98);
+}
+
+/* Utilities */
+.stack { display: grid; gap: 1rem; }
+.center { text-align: center; }
+.mb-0 { margin-bottom: 0 !important; }
+.mb-2 { margin-bottom: 0.5rem; }
+.mb-4 { margin-bottom: 1rem; }
+.mb-6 { margin-bottom: 1.5rem; }
+.mb-8 { margin-bottom: 2rem; }
+.mt-4 { margin-top: 1rem; }
+.mt-6 { margin-top: 1.5rem; }

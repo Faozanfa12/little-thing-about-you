@@ -1,0 +1,79 @@
+:root {
+  --ink: #2b1f24;
+  --ink-deep: #1d1418;
+  --muted: #6e5860;
+  --muted-light: #8e7880;
+  --rose: #b84d6b;
+  --rose-glow: rgba(220, 85, 120, 0.45);
+  --rose-light: #f7a2ba;
+  --pink-soft: #fce7ee;
+  --pink-deep: #7e2d44;
+  --wine: #4a1525;
+  --wine-deep: #2f0c16;
+  --gold: #d49a4a;
+  --gold-glow: rgba(230, 165, 75, 0.45);
+  --gold-light: #fef1db;
+  --ivory: #fffbf7;
+  --paper: rgba(255, 255, 255, 0.72);
+  --paper-intense: rgba(255, 255, 255, 0.88);
+  --background: #fff8f5;
+
+  /* Gradients */
+  --grad-rose: linear-gradient(135deg, #d85d7f 0%, #98334e 100%);
+  --grad-rose-gold: linear-gradient(135deg, #df6b8c 0%, #e0a359 100%);
+  --grad-gold: linear-gradient(135deg, #f7d598 0%, #cb8f42 100%);
+  --grad-shimmer: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.7) 50%, rgba(255,255,255,0) 100%);
+  --grad-glass: linear-gradient(135deg, rgba(255,255,255,0.85) 0%, rgba(255,245,248,0.55) 100%);
+  --grad-border: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(237,153,185,0.5), rgba(245,205,130,0.6), rgba(255,255,255,0.95));
+
+  /* Shadows */
+  --shadow-soft: 0 20px 50px rgba(83, 38, 48, 0.08);
+  --shadow-card: 0 30px 80px -15px rgba(60, 15, 30, 0.13), 0 6px 20px rgba(120, 50, 75, 0.06);
+  --shadow-card-hover: 0 40px 95px -15px rgba(60, 15, 30, 0.18), 0 10px 30px rgba(184, 77, 107, 0.15);
+  --shadow-glow: 0 0 35px rgba(216, 93, 127, 0.35);
+  --shadow-glow-gold: 0 0 35px rgba(229, 165, 75, 0.38);
+  --shadow-button: 0 14px 30px rgba(120, 35, 55, 0.22), 0 0 24px rgba(216, 93, 127, 0.35);
+
+  /* Radius */
+  --radius-xl: 36px;
+  --radius-lg: 28px;
+  --radius-md: 18px;
+  --radius-sm: 12px;
+  --radius-full: 9999px;
+
+  /* Spacing */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.25rem;
+  --space-6: 1.5rem;
+  --space-8: 2rem;
+  --space-10: 2.5rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --container: 1180px;
+
+  /* Typography */
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'DM Sans', 'Segoe UI', -apple-system, sans-serif;
+  --font-script: 'Parisienne', 'Dancing Script', cursive;
+
+  /* Transitions */
+  --transition: 280ms cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-spring: 420ms cubic-bezier(0.34, 1.56, 0.64, 1);
+  --transition-slow: 600ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Z-index */
+  --z-atmosphere: 2;
+  --z-content: 10;
+  --z-navigation: 50;
+  --z-overlay: 100;
+  --z-fx: 120;
+
+  /* Breakpoints */
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+}

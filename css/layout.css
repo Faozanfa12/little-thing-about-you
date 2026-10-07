@@ -1,0 +1,379 @@
+/* ==========================================================================
+   Layout & Framework Styles
+   ========================================================================== */
+
+.story-shell {
+  position: relative;
+  z-index: var(--z-content);
+  width: min(100% - 2rem, var(--container));
+  min-height: 100vh;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5.5rem 0 6.5rem;
+}
+
+.story-section {
+  width: 100%;
+  display: none;
+  animation: pageFade 0.65s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.story-section.is-visible {
+  display: block;
+}
+
+/* ==========================================================================
+   Luxury Glassmorphism Story Card
+   ========================================================================== */
+
+.story-card {
+  position: relative;
+  width: min(100%, 960px);
+  margin: 0 auto;
+  padding: clamp(2rem, 5vw, 4.8rem);
+  background:
+    radial-gradient(ellipse 90% 50% at 50% 0%, rgba(255, 255, 255, 0.95), transparent 75%),
+    radial-gradient(ellipse 70% 60% at 100% 100%, rgba(255, 230, 240, 0.4), transparent 70%),
+    rgba(255, 255, 255, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.88);
+  border-radius: var(--radius-xl);
+  box-shadow:
+    0 35px 95px -15px rgba(65, 20, 36, 0.14),
+    0 12px 36px rgba(184, 77, 107, 0.1),
+    0 0 50px rgba(255, 205, 225, 0.35),
+    inset 0 1px 2px rgba(255, 255, 255, 1),
+    inset 0 -1px 2px rgba(220, 130, 160, 0.15);
+  backdrop-filter: blur(28px) saturate(190%);
+  -webkit-backdrop-filter: blur(28px) saturate(190%);
+  overflow: hidden;
+  transition: transform var(--transition-slow), box-shadow var(--transition-slow);
+}
+
+/* Luminous animated top edge */
+.story-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(220, 85, 120, 0.3) 20%,
+    rgba(255, 220, 150, 0.85) 50%,
+    rgba(220, 85, 120, 0.3) 80%,
+    transparent 100%
+  );
+  filter: drop-shadow(0 0 8px rgba(255, 215, 130, 0.8));
+}
+
+/* Luxury card decorative corner flourishes */
+.story-card::after {
+  content: "✦";
+  position: absolute;
+  top: 1.25rem;
+  right: 1.35rem;
+  font-size: 0.9rem;
+  color: var(--gold);
+  opacity: 0.5;
+  filter: drop-shadow(0 0 6px rgba(229, 165, 75, 0.6));
+  pointer-events: none;
+}
+
+/* Centered card content modifier */
+.story-card.centered {
+  text-align: center;
+}
+
+/* ==========================================================================
+   Header & Topline Navigation
+   ========================================================================== */
+
+.topline {
+  position: fixed;
+  inset: 1.35rem 1.2rem auto 1.2rem;
+  z-index: var(--z-navigation);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: min(calc(100% - 2.4rem), 1120px);
+  margin: 0 auto;
+  pointer-events: none;
+}
+
+.page-count, .mini-note {
+  pointer-events: auto;
+}
+
+.mini-note {
+  font-family: var(--font-script);
+  font-size: clamp(1.4rem, 2.2vw, 2.1rem);
+  color: var(--wine);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.95rem;
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  border-radius: var(--radius-full);
+  box-shadow: 0 8px 24px rgba(85, 30, 48, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.mini-note::after {
+  content: "♥";
+  font-size: 0.95rem;
+  color: var(--rose);
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.page-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.05rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--ink);
+  box-shadow: 0 8px 24px rgba(85, 30, 48, 0.08);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+}
+
+.page-count::before {
+  content: "✦";
+  font-size: 0.65rem;
+  color: var(--gold);
+}
+
+/* ==========================================================================
+   Progress Rail
+   ========================================================================== */
+
+.progress-rail {
+  position: fixed;
+  right: 1.4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: var(--z-navigation);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  padding: 0.9rem 0.6rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.85);
+  box-shadow: 0 16px 36px rgba(80, 25, 45, 0.1);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+}
+
+.progress-dot {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 50%;
+  border: none;
+  background: rgba(160, 130, 140, 0.45);
+  padding: 0;
+  cursor: pointer;
+  transition:
+    transform var(--transition-spring),
+    background var(--transition),
+    box-shadow var(--transition);
+}
+
+.progress-dot:hover {
+  transform: scale(1.3);
+  background: var(--rose-light);
+}
+
+.progress-dot.is-current {
+  background: linear-gradient(135deg, #d85d7f 0%, #cb8f42 100%);
+  transform: scale(1.45);
+  box-shadow:
+    0 0 14px rgba(216, 93, 127, 0.85),
+    0 0 0 3px rgba(255, 255, 255, 0.95);
+}
+
+/* ==========================================================================
+   Bottom Navigation Bar
+   ========================================================================== */
+
+.nav-bar {
+  position: fixed;
+  inset: auto 1.2rem 1.6rem 1.2rem;
+  z-index: var(--z-navigation);
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: min(calc(100% - 2.4rem), 1120px);
+  gap: 1rem;
+  pointer-events: none;
+}
+
+.nav-bar .nav-button {
+  pointer-events: auto;
+}
+
+.nav-button {
+  min-width: 142px;
+  font-size: 0.94rem;
+}
+
+.nav-button.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   Floating Music Toggle & Visualizer
+   ========================================================================== */
+
+.music-toggle {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 5.6rem;
+  z-index: var(--z-navigation);
+  width: 3.3rem;
+  height: 3.3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  color: var(--wine);
+  box-shadow:
+    0 14px 34px rgba(80, 25, 45, 0.16),
+    0 0 24px rgba(235, 140, 175, 0.35);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  cursor: pointer;
+  transition: transform var(--transition-spring), box-shadow var(--transition);
+  overflow: visible;
+}
+
+/* Ambient pulse rings around music toggle */
+.music-toggle::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(220, 85, 120, 0.45);
+  opacity: 0;
+  animation: pulseRing 2.4s ease-out infinite;
+  pointer-events: none;
+}
+
+.music-toggle:not(.is-muted)::before {
+  opacity: 1;
+}
+
+.music-toggle:hover {
+  transform: scale(1.08) translateY(-2px);
+  box-shadow:
+    0 20px 42px rgba(80, 25, 45, 0.22),
+    0 0 35px rgba(220, 85, 120, 0.6);
+}
+
+.music-toggle.is-muted {
+  opacity: 0.78;
+  filter: grayscale(0.2);
+}
+
+/* Visualizer equalizer bars */
+.music-eq {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 18px;
+}
+
+.music-eq span {
+  width: 3px;
+  background: linear-gradient(180deg, var(--gold), var(--rose));
+  border-radius: 999px;
+  height: 4px;
+  transition: height var(--transition);
+}
+
+.music-toggle:not(.is-muted) .music-eq span:nth-child(1) {
+  animation: eqBounce 1s ease-in-out infinite alternate;
+}
+.music-toggle:not(.is-muted) .music-eq span:nth-child(2) {
+  animation: eqBounce 0.8s ease-in-out 0.2s infinite alternate;
+}
+.music-toggle:not(.is-muted) .music-eq span:nth-child(3) {
+  animation: eqBounce 1.2s ease-in-out 0.4s infinite alternate;
+}
+
+/* Floating musical notes */
+.music-note-bubble {
+  position: absolute;
+  top: -8px;
+  font-size: 0.85rem;
+  color: var(--rose);
+  opacity: 0;
+  pointer-events: none;
+  animation: noteFloat 2.8s ease-out infinite;
+}
+
+/* Luminous Now Playing Pill */
+.now-playing-pill {
+  position: fixed;
+  right: 1.4rem;
+  bottom: 9.6rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.45rem 1.1rem;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.92);
+  border: 1px solid rgba(220, 85, 120, 0.35);
+  box-shadow: 0 8px 24px rgba(85, 30, 48, 0.16), 0 0 16px rgba(220, 85, 120, 0.2);
+  color: var(--wine);
+  font-family: var(--font-body);
+  font-size: 0.84rem;
+  font-weight: 600;
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: var(--z-navigation);
+  pointer-events: none;
+  animation: toastSlideUp 350ms cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  transition: opacity 400ms ease, transform 400ms ease;
+  white-space: nowrap;
+}
+
+.now-playing-pill.is-fadeout {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+.now-playing-pill span {
+  color: var(--rose);
+  animation: pulse 2s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   Grids
+   ========================================================================== */
+
+.grid-2, .grid-3, .grid-4 {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.grid-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+.grid-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.grid-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }

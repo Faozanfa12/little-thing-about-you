@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>A Little Website About You | Fadila</title>
+    <meta name="description" content="A little website about you" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Parisienne&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./css/variables.css?v=20261006-luxury-glow-v5" />
+    <link rel="stylesheet" href="./css/reset.css?v=20261006-luxury-glow-v5" />
+    <link rel="stylesheet" href="./css/base.css?v=20261006-luxury-glow-v5" />
+    <link rel="stylesheet" href="./css/layout.css?v=20261006-luxury-glow-v5" />
+    <link rel="stylesheet" href="./css/components.css?v=20261006-luxury-glow-v5" />
+    <link rel="stylesheet" href="./css/animations.css?v=20261006-luxury-glow-v5" />
+    <link rel="stylesheet" href="./css/pages.css?v=20261006-luxury-glow-v5" />
+    <link rel="stylesheet" href="./css/responsive.css?v=20261006-luxury-glow-v5" />
+  </head>
+  <body class="story-app page-opening" data-page="opening">
+    <div class="grain" aria-hidden="true"></div>
+    <div class="loader-screen" id="loaderScreen" aria-live="polite">
+      <div class="loader-card">
+        <div class="loader-heart" aria-hidden="true"></div>
+        <h1 class="display" style="font-size: clamp(2rem, 5vw, 3.2rem); margin: 0;">A little website for you.</h1>
+        <div class="loader-progress" aria-hidden="true"><span></span></div>
+      </div>
+    </div>
+    <main class="story-shell">
+      <section class="story-section is-visible">
+        <div class="story-card centered reveal">
+          <p class="eyebrow">intro</p>
+          <h1 class="display" style="font-size: clamp(2.8rem,7vw,5.5rem);">A tiny love story, told with care.</h1>
+          <p class="body-copy" style="max-width: 42rem; margin: 1.25rem auto 0;">I wanted a place where I could keep things honest, soft, and real. One chapter, one feeling, one little moment at a time.</p>
+          <div class="stack mt-6" style="max-width: 24rem; margin-inline: auto;">
+            <button class="primary" type="button" id="enterStoryBtn">Enter the story ✨ →</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <script type="module" src="./js/app.js?v=20261006-luxury-glow-v5"></script>
+    <script type="module">
+      const loader = document.getElementById('loaderScreen');
+      const goToStory = () => {
+        sessionStorage.setItem('little-website-music-playing', 'true');
+        window.location.href = './pages/page-01-opening.html';
+      };
+      const enterBtn = document.getElementById('enterStoryBtn');
+      if (enterBtn) enterBtn.addEventListener('click', goToStory);
+      setTimeout(() => { if (loader) loader.classList.add('is-hidden'); }, 1400);
+      setTimeout(goToStory, 5000);
+    </script>
+  </body>
+</html>
